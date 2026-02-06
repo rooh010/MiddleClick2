@@ -5,18 +5,38 @@
 //
 
 #import "WakeObserver.h"
+#import "Controller.h"
 
 
 @implementation WakeObserver
 
+- (id) initWithController:(Controller *)ctrl
+{
+	self = [super init];
+	if (self != nil)
+	{
+		controller = [ctrl retain];
+	}
+	return self;
+}
+
+- (void) dealloc
+{
+	[controller release];
+	[super dealloc];
+}
+
 - (void) receiveWakeNote: (NSNotification*) note
 {
-	[NSThread sleepForTimeInterval:10.0]; //wait 10 sec before restarting to be sure everthing is up
-	
-	NSString *relaunch = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"relaunch"];
-	int procid = [[NSProcessInfo processInfo] processIdentifier];
-	[NSTask launchedTaskWithLaunchPath:relaunch arguments:[NSArray arrayWithObjects:[[NSBundle mainBundle] bundlePath], [NSString stringWithFormat:@"%d",procid], nil]];
-	[NSApp terminate:NULL];
+	NSLog(@"Received wake notification: %@", [note name]);
+
+	// Restart multitouch devices after a short delay to ensure system is ready
+	[self performSelector:@selector(restartDevices) withObject:nil afterDelay:0.5];
+}
+
+- (void) restartDevices
+{
+	[controller restartMultitouchDevices];
 }
 
 

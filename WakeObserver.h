@@ -6,11 +6,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class Controller;
 
 @interface WakeObserver : NSObject {
-
+	Controller *controller;
 }
 
+- (id) initWithController:(Controller *)ctrl;
 - (void) receiveWakeNote: (NSNotification*) note;
 
 @end

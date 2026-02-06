@@ -10,10 +10,11 @@
 
 
 @interface Controller : NSObject {
-
+	NSMutableArray *deviceList;
 }
 
 - (void) start;
+- (void) restartMultitouchDevices;
 - (void)setMode:(BOOL)click;
 - (BOOL)getClickMode;
 

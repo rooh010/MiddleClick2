@@ -62,32 +62,57 @@ BOOL pressed;
 {
 	pressed = NO;
 	needToClick = NO;
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     [NSApplication sharedApplication];
-	
-	
+
+
 	//Get list of all multi touch devices
-	NSMutableArray* deviceList = (NSMutableArray*)MTDeviceCreateList(); //grab our device list
-	
-	
+	deviceList = (NSMutableArray*)MTDeviceCreateList(); //grab our device list
+	[deviceList retain];
+
+
 	//Iterate and register callbacks for multitouch devices.
 	for(int i = 0; i<[deviceList count]; i++) //iterate available devices
 	{
         MTRegisterContactFrameCallback((MTDeviceRef)[deviceList objectAtIndex:i], callback); //assign callback for device
         MTDeviceStart((MTDeviceRef)[deviceList objectAtIndex:i],0); //start sending events
 	}
-	
+
 	//register a callback to know when osx come back from sleep
-	WakeObserver *wo = [[WakeObserver alloc] init];
+	WakeObserver *wo = [[WakeObserver alloc] initWithController:self];
 	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: wo selector: @selector(receiveWakeNote:) name: NSWorkspaceDidWakeNotification object: NULL];
-	
-	
+	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: wo selector: @selector(receiveWakeNote:) name: NSWorkspaceScreensDidWakeNotification object: NULL];
+
+
 	//add traymenu
     TrayMenu *menu = [[TrayMenu alloc] initWithController:self];
     [NSApp setDelegate:menu];
     [NSApp run];
-	
+
 	[pool release];
+}
+
+- (void) restartMultitouchDevices
+{
+	NSLog(@"Restarting multitouch devices...");
+
+	// Stop all devices
+	for(int i = 0; i<[deviceList count]; i++)
+	{
+		MTDeviceStop((MTDeviceRef)[deviceList objectAtIndex:i]);
+	}
+
+	// Small delay to ensure devices are fully stopped
+	[NSThread sleepForTimeInterval:0.1];
+
+	// Restart all devices
+	for(int i = 0; i<[deviceList count]; i++)
+	{
+		MTRegisterContactFrameCallback((MTDeviceRef)[deviceList objectAtIndex:i], callback);
+		MTDeviceStart((MTDeviceRef)[deviceList objectAtIndex:i],0);
+	}
+
+	NSLog(@"Multitouch devices restarted successfully");
 }
 
 - (BOOL)getClickMode

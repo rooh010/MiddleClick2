@@ -24,6 +24,7 @@
 		AA0015 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0002 /* IOKit.framework */; };
 		AA0016 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0003 /* CoreGraphics.framework */; };
 		AA0017 /* MultitouchBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0017 /* MultitouchBridge.m */; };
+		AA0018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0019 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		CC0003 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BB0017 /* MultitouchBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultitouchBridge.m; sourceTree = "<group>"; };
 		BB0018 /* MultitouchBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultitouchBridge.h; sourceTree = "<group>"; };
+		BB0019 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,12 +170,24 @@
 		FF0011 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BB0019 /* Assets.xcassets */,
 				BB0016 /* MiddleClick2.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXResourcesBuildPhase section */
+		RR0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0018 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		TT0001 /* MiddleClick2 */ = {
@@ -182,6 +196,7 @@
 			buildPhases = (
 				PP0001 /* Sources */,
 				EE0001 /* Frameworks */,
+				RR0001 /* Resources */,
 			);
 			buildRules = (
 			);

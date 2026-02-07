@@ -192,8 +192,6 @@ log show --predicate 'subsystem == "com.middleclick2.app"' --last 5m
 ## Credits
 
 - **Original MiddleClick**: [cl3m/MiddleClick](https://github.com/cl3m/MiddleClick)
-- **Modern Rewrite**: 2026
-- **Multitouch API**: Based on [steike's multitouch code](http://www.steike.com/code/multitouch/)
 
 ## License
 
@@ -209,6 +207,15 @@ Contributions welcome! Please:
 4. Submit a pull request
 
 ## Version History
+
+### 2.0.3 (2026-02-07)
+- DMG installer with drag-to-Applications interface
+- Professional distribution format for easy installation
+
+### 2.0.2 (2026-02-07)
+- Screen unlock detection for automatic device restart
+- Improved reliability after locking/unlocking screen
+- Uses macOS distributed notifications for unlock events
 
 ### 2.0.0 (2026-02-06)
 - Complete Swift rewrite

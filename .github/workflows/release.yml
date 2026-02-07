@@ -22,18 +22,34 @@ jobs:
             -configuration Release \
             -derivedDataPath build
 
-      - name: Package App
+      - name: Install create-dmg
+        run: brew install create-dmg
+
+      - name: Create DMG
         run: |
           APP_PATH="build/Build/Products/Release/MiddleClick2.app"
           if [ ! -d "$APP_PATH" ]; then
             echo "Build output not found: $APP_PATH" >&2
             exit 1
           fi
-          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "MiddleClick2-${GITHUB_REF_NAME}.zip"
+
+          # Create DMG with drag-to-Applications interface
+          create-dmg \
+            --volname "MiddleClick2" \
+            --volicon "$APP_PATH/Contents/Resources/AppIcon.icns" \
+            --window-pos 200 120 \
+            --window-size 600 400 \
+            --icon-size 100 \
+            --icon "MiddleClick2.app" 175 190 \
+            --hide-extension "MiddleClick2.app" \
+            --app-drop-link 425 190 \
+            --no-internet-enable \
+            "MiddleClick2-${GITHUB_REF_NAME}.dmg" \
+            "$APP_PATH"
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: "MiddleClick2-${{ github.ref_name }}.zip"
+          files: "MiddleClick2-${{ github.ref_name }}.dmg"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

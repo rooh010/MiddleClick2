@@ -42,7 +42,12 @@ Swift-based maintenance, and better reliability on current hardware.
 
 ### Pre-built Binary
 
-Download from [Releases](https://github.com/rooh010/MiddleClick2/releases)
+Download the DMG installer from [Releases](https://github.com/rooh010/MiddleClick2/releases)
+
+1. Download the `.dmg` file
+2. Open the DMG
+3. Drag MiddleClick2 to your Applications folder
+4. Launch from Applications
 
 ## Usage
 
@@ -101,7 +106,7 @@ Releases are created by GitHub Actions when you push a version tag:
    git tag v2.0.1
    git push origin v2.0.1
    ```
-2. The workflow builds a **Release** app and uploads a zip to GitHub Releases.
+2. The workflow builds a **Release** app and creates a DMG installer with drag-to-Applications interface, then uploads it to GitHub Releases.
 
 ## Development
 

@@ -49,6 +49,20 @@ Download the DMG installer from [Releases](https://github.com/rooh010/MiddleClic
 3. Drag MiddleClick2 to your Applications folder
 4. Launch from Applications
 
+![DMG Installer](assets/dmg-installer.png)
+
+**Note:** If you see a security warning that "MiddleClick2 was blocked", this is because the app is not notarized with Apple. To bypass this:
+
+1. **Right-click** (or Control-click) on MiddleClick2.app in Applications
+2. Select **"Open"** from the menu
+3. Click **"Open"** in the dialog that appears
+
+Alternatively, after the first blocked attempt, go to:
+- **System Settings** → **Privacy & Security**
+- Scroll down and click **"Open Anyway"** next to the MiddleClick2 message
+
+You only need to do this once. After the first launch, the app will open normally.
+
 ## Usage
 
 1. **Launch the app** - Look for the mouse icon in your menu bar (top-right)

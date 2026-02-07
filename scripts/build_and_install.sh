@@ -10,7 +10,8 @@ INSTALL_PATH="/Applications/${APP_NAME}.app"
 xcodebuild -project "$ROOT_DIR/MiddleClick2.xcodeproj" \
   -scheme "$APP_NAME" \
   -configuration Debug \
-  -derivedDataPath "$DERIVED_DATA"
+  -derivedDataPath "$DERIVED_DATA" \
+  CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION=YES
 
 if [[ ! -d "$APP_PATH" ]]; then
   echo "Build output not found: $APP_PATH" >&2

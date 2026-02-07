@@ -83,6 +83,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         systemEventMonitor.onWake = { [weak self] in
             self?.deviceLifecycleManager.restartDevicesAfterWake()
         }
+        systemEventMonitor.onScreenUnlock = { [weak self] in
+            self?.deviceLifecycleManager.restartDevicesAfterWake()
+        }
         systemEventMonitor.startMonitoring()
     }
 

@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build (Release)
+        run: |
+          xcodebuild -project MiddleClick2.xcodeproj \
+            -scheme MiddleClick2 \
+            -configuration Release \
+            -derivedDataPath build
+
+      - name: Package App
+        run: |
+          APP_PATH="build/Build/Products/Release/MiddleClick2.app"
+          if [ ! -d "$APP_PATH" ]; then
+            echo "Build output not found: $APP_PATH" >&2
+            exit 1
+          fi
+          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "MiddleClick2-${GITHUB_REF_NAME}.zip"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "MiddleClick2-${{ github.ref_name }}.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

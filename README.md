@@ -2,7 +2,8 @@
 
 Modern Swift rewrite of MiddleClick - Three-finger tap middle-click emulation for macOS.
 
-This repository is a fork. It tracks the original project and adds updates for newer macOS versions.
+This repository is a fork of the original MiddleClick project. It focuses on modern macOS support,
+Swift-based maintenance, and better reliability on current hardware.
 
 ## Features
 
@@ -90,6 +91,17 @@ xcodebuild -project MiddleClick2.xcodeproj -scheme MiddleClick2 -configuration R
 # Run built app
 open build/Build/Products/Debug/MiddleClick2.app
 ```
+
+## Releasing
+
+Releases are created by GitHub Actions when you push a version tag:
+
+1. Tag the commit (use a `v` prefix):
+   ```bash
+   git tag v2.0.1
+   git push origin v2.0.1
+   ```
+2. The workflow builds a **Release** app and uploads a zip to GitHub Releases.
 
 ## Development
 
